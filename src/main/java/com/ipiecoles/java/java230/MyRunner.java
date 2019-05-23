@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -49,6 +50,7 @@ public class MyRunner implements CommandLineRunner {
 		String fileName = "employes.csv";
 		readFile(fileName);
 		//readFile(strings[0]);
+		employeRepository.save(employes);
 
 	}
 
@@ -211,6 +213,17 @@ public class MyRunner implements CommandLineRunner {
 					if (employe.getMatricule().equals(list.get(6))) {
 						technicien.setManager((Manager) employe);
 						found = true;
+					}
+				}
+
+				//Récupération des managers présent en base
+				Iterable<Employe> employeBase = employeRepository.findAll();
+				if(!found) {
+					for (Employe employe : employeBase) {
+						if (employe.getMatricule().equals(list.get(6))) {
+							technicien.setManager((Manager) employe);
+							found = true;
+						}
 					}
 				}
 				//Si il n'existe pas on lance cette exception
