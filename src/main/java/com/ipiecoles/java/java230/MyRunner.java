@@ -22,7 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -67,8 +66,9 @@ public class MyRunner implements CommandLineRunner {
 			logger.error("Problème dans l'ouverture du fichier " + fileName);
 			return new ArrayList<>();
 		}
+
 		//Permet lors de l'ajout d'un manager à un technicien d'avoir traité tous les managers
-		List<String> listEmpInString = stream.sorted(Collections.reverseOrder()).collect(Collectors.toList());
+		List<String> listEmpInString = stream.sorted().collect(Collectors.toList());
 
 		logger.info(listEmpInString.size() + " lignes lues");
 		//Traitement pour chaque ligne récupéré
@@ -121,9 +121,9 @@ public class MyRunner implements CommandLineRunner {
 		if (list.size() == NB_CHAMPS_COMMERCIAL) {
 			Commercial commercial = new Commercial();
 			//Assignation dans l'objet commercial de son matricule, nom et prénom
-			commercial = (Commercial) setBasicData(commercial, list);
+			commercial = (Commercial) setMatriculeNomPrenom(commercial, list);
 			//Assignation dans l'objet commercial de sa date d'embauche
-			commercial = (Commercial) setDate(commercial, list.get(3));
+			commercial = (Commercial) setDateEmbauche(commercial, list.get(3));
 			//Assignation dans l'objet commercial de son salaire
 			commercial = (Commercial) setSalaire(commercial, list.get(4));
 
@@ -160,9 +160,9 @@ public class MyRunner implements CommandLineRunner {
 		if (list.size() == NB_CHAMPS_MANAGER) {
 			Manager manager = new Manager();
 			//Assignation dans l'objet manager de son matricule, nom et prénom
-			manager = (Manager) setBasicData(manager, list);
+			manager = (Manager) setMatriculeNomPrenom(manager, list);
 			//Assignation dans l'objet manager de sa date d'embauche
-			manager = (Manager) setDate(manager, list.get(3));
+			manager = (Manager) setDateEmbauche(manager, list.get(3));
 			//Assignation dans l'objet manager de son salaire
 			manager = (Manager) setSalaire(manager, list.get(4));
 
@@ -187,10 +187,10 @@ public class MyRunner implements CommandLineRunner {
 		if (list.size() == NB_CHAMPS_TECHNICIEN) {
 			Technicien technicien = new Technicien();
 			//Assignation dans l'objet technicien de son matricule, nom et prénom
-			technicien = (Technicien) setBasicData(technicien, list);
+			technicien = (Technicien) setMatriculeNomPrenom(technicien, list);
 
 			//Assignation dans l'objet technicien de sa date d'embauche
-			technicien = (Technicien) setDate(technicien, list.get(3));
+			technicien = (Technicien) setDateEmbauche(technicien, list.get(3));
 
 			//Assignation dans l'objet technicien de son matricule
 			try {
@@ -229,14 +229,14 @@ public class MyRunner implements CommandLineRunner {
 
 	/**
 	 * Méthode qui assigne à un employé passé en paramètre son matricule, nom et prénom contenu dans
-	 * la liste passé en paramètre s'il les valeurs sont valide
+	 * la liste passée en paramètre si les valeurs sont valide
 	 *
 	 * @param employe Employé traité
 	 * @param list    des élément présente dans la ligne courante
 	 * @return l'employé modifié si les valeurs était correct sinon renvoie de l'employé inchangé
 	 * @throws BatchException si les valeurs de la liste ne sont pas valide
 	 */
-	private Employe setBasicData(Employe employe, List<String> list) throws BatchException {
+	private Employe setMatriculeNomPrenom(Employe employe, List<String> list) throws BatchException {
 		//Assignation du matricule
 		if (list.get(0).matches(REGEX_MATRICULE))
 			employe.setMatricule(list.get(0));
@@ -264,7 +264,7 @@ public class MyRunner implements CommandLineRunner {
 	 * @return l'employé modifié si la date passée en paramètre est valide
 	 * @throws BatchException si la date n'est pas valide
 	 */
-	private Employe setDate(Employe employe, String date) throws BatchException {
+	private Employe setDateEmbauche(Employe employe, String date) throws BatchException {
 		try {
 			//Conversion de la date de String à LocalDate
 			LocalDate dateFormater = LocalDate.parse(date, DateTimeFormat.forPattern("dd/MM/YYYY"));
