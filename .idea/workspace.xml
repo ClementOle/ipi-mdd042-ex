@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1da49981-c884-4365-811a-f7e0b7c137fb" name="Default Changelist" comment="" />
+    <list default="true" id="1da49981-c884-4365-811a-f7e0b7c137fb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ipiecoles/java/java230/MyRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ipiecoles/java/java230/MyRunner.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ipiecoles/java/java230/MyRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="72" column="17" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+            <state relative-caret-position="-1911">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3723#3731#0" expanded="true" />
@@ -52,6 +56,9 @@
       <replace>technicien</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/com/ipiecoles/java/java230/MyRunner.java" root0="SKIP_INSPECTION" />
   </component>
@@ -68,6 +75,7 @@
     <option name="width" value="980" />
     <option name="height" value="1040" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -128,6 +136,7 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -169,12 +178,12 @@
       <option name="presentableId" value="Default" />
       <updated>1558595367822</updated>
       <workItem from="1558595376772" duration="2529000" />
-      <workItem from="1558597937018" duration="10578000" />
+      <workItem from="1558597937018" duration="12060000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13107000" />
+    <option name="totallyTimeSpent" value="14589000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -338,8 +347,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ipiecoles/java/java230/MyRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="72" column="17" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+        <state relative-caret-position="-1911">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3723#3731#0" expanded="true" />

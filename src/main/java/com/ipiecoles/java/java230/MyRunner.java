@@ -20,7 +20,10 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -88,8 +91,8 @@ public class MyRunner implements CommandLineRunner {
 	 * @throws BatchException si le type d'employé n'a pas été reconnu
 	 */
 	private void processLine(String ligne) throws BatchException {
-		String car = ligne.substring(0, 1);
-		switch (car) {
+		//Traitement en fonction du type d'employé
+		switch (ligne.substring(0, 1)) {
 			case "T":
 				processTechnicien(ligne);
 				break;
@@ -100,7 +103,7 @@ public class MyRunner implements CommandLineRunner {
 				processCommercial(ligne);
 				break;
 			default:
-				throw new BatchException("Type d'employé inconnu : " + car);
+				throw new BatchException("Type d'employé inconnu : " + ligne.substring(0, 1));
 
 		}
 	}
@@ -112,27 +115,31 @@ public class MyRunner implements CommandLineRunner {
 	 * @throws BatchException s'il y a un problème sur cette ligne
 	 */
 	private void processCommercial(String ligneCommercial) throws BatchException {
+		//Stockage de tous les éléments de la ligne dans une liste
 		List<String> list = new ArrayList<String>(Arrays.asList(ligneCommercial.split(",")));
+		//Si la list comprend le bon nombre d'éléments
 		if (list.size() == NB_CHAMPS_COMMERCIAL) {
 			Commercial commercial = new Commercial();
-
+			//Assignation dans l'objet commercial de son matricule, nom et prénom
 			commercial = (Commercial) setBasicData(commercial, list);
-
+			//Assignation dans l'objet commercial de sa date d'embauche
 			commercial = (Commercial) setDate(commercial, list.get(3));
-
+			//Assignation dans l'objet commercial de son salaire
 			commercial = (Commercial) setSalaire(commercial, list.get(4));
 
-
+			//Assignation dans l'objet commercial de son chiffre d'affaire annuel
 			try {
 				commercial.setCaAnnuel(Double.parseDouble(list.get(5)));
 			} catch (Exception e) {
 				throw new BatchException("Le chiffre d'affaire du commercial est incorrect : " + list.get(5));
 			}
+			//Assignation dans l'objet commercial de sa performance
 			try {
 				commercial.setPerformance(Integer.parseInt(list.get(6)));
 			} catch (Exception e) {
 				throw new BatchException("La performence du commercial est incorrect : " + list.get(6));
 			}
+			//Ajout du commercial dans la liste des employés valide
 			employes.add(commercial);
 
 		} else {
@@ -147,15 +154,19 @@ public class MyRunner implements CommandLineRunner {
 	 * @throws BatchException s'il y a un problème sur cette ligne
 	 */
 	private void processManager(String ligneManager) throws BatchException {
+		//Stockage de tous les éléments de la ligne dans une liste
 		List<String> list = new ArrayList<String>(Arrays.asList(ligneManager.split(",")));
+		//Si la list comprend le bon nombre d'éléments
 		if (list.size() == NB_CHAMPS_MANAGER) {
 			Manager manager = new Manager();
+			//Assignation dans l'objet manager de son matricule, nom et prénom
 			manager = (Manager) setBasicData(manager, list);
-
+			//Assignation dans l'objet manager de sa date d'embauche
 			manager = (Manager) setDate(manager, list.get(3));
-
+			//Assignation dans l'objet manager de son salaire
 			manager = (Manager) setSalaire(manager, list.get(4));
 
+			//Ajout du manager dans la liste des employés valide
 			employes.add(manager);
 		} else {
 			throw new BatchException("La ligne manager ne contient pas " + NB_CHAMPS_MANAGER + " éléments mais " + list.size());
@@ -170,14 +181,18 @@ public class MyRunner implements CommandLineRunner {
 	 * @throws BatchException s'il y a un problème sur cette ligne
 	 */
 	private void processTechnicien(String ligneTechnicien) throws BatchException {
+		//Stockage de tous les éléments de la ligne dans une liste
 		List<String> list = new ArrayList<String>(Arrays.asList(ligneTechnicien.split(",")));
+		//Si la list comprend le bon nombre d'éléments
 		if (list.size() == NB_CHAMPS_TECHNICIEN) {
 			Technicien technicien = new Technicien();
+			//Assignation dans l'objet technicien de son matricule, nom et prénom
 			technicien = (Technicien) setBasicData(technicien, list);
 
-			//Date//
+			//Assignation dans l'objet technicien de sa date d'embauche
 			technicien = (Technicien) setDate(technicien, list.get(3));
 
+			//Assignation dans l'objet technicien de son matricule
 			try {
 				technicien.setGrade(Integer.parseInt(list.get(5)));
 			} catch (TechnicienException te) {
@@ -185,10 +200,12 @@ public class MyRunner implements CommandLineRunner {
 			} catch (Exception e) {
 				throw new BatchException("Le grade du technicien est incorrect : " + list.get(5));
 			}
-
+			//Assignation dans l'objet technicien de son salaire
 			technicien = (Technicien) setSalaire(technicien, list.get(4));
 
+			//Assignation dans l'objet technicien de son manager
 			if (list.get(6).matches(REGEX_MATRICULE_MANAGER)) {
+				//Traitement pour vérifier si le matricule est bien assigné à un manager
 				boolean found = false;
 				for (Employe employe : employes) {
 					if (employe.getMatricule().equals(list.get(6))) {
@@ -196,12 +213,13 @@ public class MyRunner implements CommandLineRunner {
 						found = true;
 					}
 				}
+				//Si il n'existe pas on lance cette exception
 				if (!found)
 					throw new BatchException("Le manager de matricule " + list.get(6) + " n'a pas été trouvé dans le fichier ou en base de données");
 			} else {
 				throw new BatchException("La châine " + list.get(6) + " ne respecte pas l'expression regulière " + REGEX_MATRICULE_MANAGER);
 			}
-
+			//Ajout du technicien dans la liste des employés valide
 			employes.add(technicien);
 		} else {
 			throw new BatchException("La ligne technicien ne contient pas " + NB_CHAMPS_TECHNICIEN + " éléments mais " + list.size());
@@ -210,51 +228,71 @@ public class MyRunner implements CommandLineRunner {
 	}
 
 	/**
+	 * Méthode qui assigne à un employé passé en paramètre son matricule, nom et prénom contenu dans
+	 * la liste passé en paramètre s'il les valeurs sont valide
 	 *
-	 * @param employe
-	 * @param list
-	 * @return
-	 * @throws BatchException
+	 * @param employe Employé traité
+	 * @param list    des élément présente dans la ligne courante
+	 * @return l'employé modifié si les valeurs était correct sinon renvoie de l'employé inchangé
+	 * @throws BatchException si les valeurs de la liste ne sont pas valide
 	 */
 	private Employe setBasicData(Employe employe, List<String> list) throws BatchException {
+		//Assignation du matricule
 		if (list.get(0).matches(REGEX_MATRICULE))
 			employe.setMatricule(list.get(0));
 		else
 			throw new BatchException("la chaîne " + list.get(0) + " ne respecte pas l'expression régulière " + REGEX_MATRICULE);
+		//Assignation du nom
 		if (list.get(1).matches(REGEX_NOM))
 			employe.setNom(list.get(1));
 		else
 			throw new BatchException("la chaîne " + list.get(0) + " ne respecte pas l'expression régulière " + REGEX_NOM);
+		//Assignation du prénom
 		if (list.get(2).matches(REGEX_PRENOM))
 			employe.setPrenom(list.get(2));
 		else
 			throw new BatchException("la chaîne " + list.get(0) + " ne respecte pas l'expression régulière " + REGEX_PRENOM);
+		//Renvoie de l'employé modifié ou non
 		return employe;
 	}
 
 	/**
+	 * Méthode qui assigne à l'employé passé en paramètre la date d'embauche passée en paramètre
 	 *
-	 * @param employe
-	 * @param date
-	 * @return
-	 * @throws BatchException
+	 * @param employe Employé traité
+	 * @param date    Date d'embauche de l'employé en String
+	 * @return l'employé modifié si la date passée en paramètre est valide
+	 * @throws BatchException si la date n'est pas valide
 	 */
 	private Employe setDate(Employe employe, String date) throws BatchException {
 		try {
+			//Conversion de la date de String à LocalDate
 			LocalDate dateFormater = LocalDate.parse(date, DateTimeFormat.forPattern("dd/MM/YYYY"));
+			//Assignation de la date d'embauche si aucune exception n'a été levé
 			employe.setDateEmbauche(dateFormater);
 		} catch (Exception e) {
 			throw new BatchException(date + " ne respecte pas le format dd/MM/yyyy");
 		}
+		//Renvoie de l'employé modifié ou non
 		return employe;
 	}
 
+	/**
+	 * Méthode qui assigne à l'employé passé en paramètre le salaire passé en paramètre
+	 *
+	 * @param employe Employé traité
+	 * @param salaire Salaire de l'employé en String
+	 * @return l'employé modifié si le salaire passé en paramètre est valide
+	 * @throws BatchException si le salaire n'est pas valide
+	 */
 	private Employe setSalaire(Employe employe, String salaire) throws BatchException {
 		try {
+			//Conversion du salaire de String à Double et assignation de se salaire à l'employé
 			employe.setSalaire(Double.parseDouble(salaire));
 		} catch (Exception e) {
 			throw new BatchException(salaire + " n'est pas un nombre valide pour un salaire");
 		}
+		//Renvoie de l'employé modifié ou non
 		return employe;
 	}
 }
