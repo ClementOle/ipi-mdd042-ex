@@ -1,0 +1,30 @@
+
+gsquid:S20958"DUse try-with-resources or close this "Stream" in a "finally" clause.(éä÷üÿÿÿÿ8Æ±§®-
+Zsquid:UnusedPrivateMethodb"6Remove this unused private "processTechnicien" method.( è–+
+`squid:UnusedPrivateMethodP"6Remove this unused private "processCommercial" method.(°«òÖşÿÿÿÿ
+¿%squid:RedundantThrowsDeclarationCheckY"Remove the declaration of thrown exception 'com.ipiecoles.java.java230.exceptions.BatchException', as it cannot be thrown from method's body.(ßá®º
+¾%squid:RedundantThrowsDeclarationCheckb"Remove the declaration of thrown exception 'com.ipiecoles.java.java230.exceptions.BatchException', as it cannot be thrown from method's body.( è–+
+Tsquid:S1068"8Remove this unused "NB_CHAMPS_TECHNICIEN" private field.(ÃØöøÿÿÿÿ
+Wsquid:S1068";Remove this unused "REGEX_MATRICULE_MANAGER" private field.(´§«Ñùÿÿÿÿ
+|squid:S3973<"YUse curly braces or indentation to denote the code conditionally executed by this "else".(„¶áìøÿÿÿÿ8ØÔ®®-
+Isquid:S1135H"2Complete the task associated to this TODO comment.(…ïœ†
+Isquid:S1135Z"2Complete the task associated to this TODO comment.(…ïœ†
+^squid:S001126"FDefine and throw a dedicated exception instead of using a generic one.(¿âØÇ
+Hsquid:S1172G",Remove this unused method parameter "ligne".(­÷¢şÿÿÿÿ
+Zsquid:UnusedPrivateMethodG"0Remove this unused private "processLine" method.(­÷¢şÿÿÿÿ
+Ä%squid:RedundantThrowsDeclarationCheckP"Remove the declaration of thrown exception 'com.ipiecoles.java.java230.exceptions.BatchException', as it cannot be thrown from method's body.(°«òÖşÿÿÿÿ
+Lsquid:S1068"5Remove this unused "NB_CHAMPS_MANAGER" private field.(¥ºƒÛ
+Isquid:S1135Q"2Complete the task associated to this TODO comment.(…ïœ†
+Tsquid:S1068"8Remove this unused "NB_CHAMPS_COMMERCIAL" private field.(‘ò‘‚øÿÿÿÿ
+Osquid:S1068"3Remove this unused "REGEX_MATRICULE" private field.(È×—²øÿÿÿÿ
+Jsquid:S1172Y"3Remove this unused method parameter "ligneManager".(ßá®º
+Lsquid:S1068"0Remove this unused "REGEX_PRENOM" private field.(¡Áøÿÿÿÿ
+gsquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(…÷âñúÿÿÿÿ
+Isquid:S1135c"2Complete the task associated to this TODO comment.(…ïœ†
+Lsquid:S1172b"6Remove this unused method parameter "ligneTechnicien".( è–+
+Fsquid:S1068("*Remove this unused "logger" private field.(ò­ğ¿ûÿÿÿÿ
+Rsquid:S1172P"6Remove this unused method parameter "ligneCommercial".(°«òÖşÿÿÿÿ
+Isquid:S1068"-Remove this unused "REGEX_NOM" private field.(ùù„Áúÿÿÿÿ
+Xsquid:UnusedPrivateMethodY"3Remove this unused private "processManager" method.(ßá®º
+Isquid:S1135="2Complete the task associated to this TODO comment.(…ïœ†
+Ä%squid:RedundantThrowsDeclarationCheckG"Remove the declaration of thrown exception 'com.ipiecoles.java.java230.exceptions.BatchException', as it cannot be thrown from method's body.(­÷¢şÿÿÿÿ
