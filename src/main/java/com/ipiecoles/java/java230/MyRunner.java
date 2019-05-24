@@ -218,13 +218,14 @@ public class MyRunner implements CommandLineRunner {
 
 				//Récupération des managers présent en base
 				Iterable<Employe> employeBase = employeRepository.findAll();
-				if(!found) {
-					for (Employe employe : employeBase) {
-						if (employe.getMatricule().equals(list.get(6))) {
+				if(!found) {/*
+					for (Employe employe : employeBase) {*/
+					Employe employe = employeRepository.findByMatricule(list.get(6));
+						if (employe != null && employe.getMatricule().substring(0,1).equals("M")) {
 							technicien.setManager((Manager) employe);
 							found = true;
 						}
-					}
+//					}
 				}
 				//Si il n'existe pas on lance cette exception
 				if (!found)
