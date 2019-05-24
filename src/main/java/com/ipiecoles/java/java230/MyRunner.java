@@ -209,6 +209,7 @@ public class MyRunner implements CommandLineRunner {
 			if (list.get(6).matches(REGEX_MATRICULE_MANAGER)) {
 				//Traitement pour vérifier si le matricule est bien assigné à un manager
 				boolean found = false;
+				//Vérification dans les employés déjà traités
 				for (Employe employe : employes) {
 					if (employe.getMatricule().equals(list.get(6))) {
 						technicien.setManager((Manager) employe);
@@ -216,12 +217,11 @@ public class MyRunner implements CommandLineRunner {
 					}
 				}
 
-				//Récupération des managers présent en base
-				Iterable<Employe> employeBase = employeRepository.findAll();
+				//Vérification en base
 				if(!found) {/*
 					for (Employe employe : employeBase) {*/
 					Employe employe = employeRepository.findByMatricule(list.get(6));
-						if (employe != null && employe.getMatricule().substring(0,1).equals("M")) {
+						if (employe != null) {
 							technicien.setManager((Manager) employe);
 							found = true;
 						}
